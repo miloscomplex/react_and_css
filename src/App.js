@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+
+  const [color, setColor] = useState('white')
+
+  const colors = ['white', 'yellow', 'red', 'blue', 'green']
+
+  const renderButtons = colors => {
+    return colors.map( (color, index) => {
+      return ( <li key={index}
+        className={'color-selector ' + color}
+        onClick={() => setColor(color)}>
+      </li> )
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div id='area' className={color}> </div>
+      <div id='toolbox'>
+        { renderButtons(colors) }
+      </div>
     </div>
   );
 }
